@@ -31,8 +31,10 @@ public class MyExample {
             config.setJdbcUrl("jdbc:postgresql://localhost/postgres");
             config.setUsername("user");
             config.setPassword("123");
-
+            config.setDriverClassName("org.postgresql.Driver"); //
+//            config.setDataSourceClassName("org.postgresql.ds.PGSimpleDataSource");
             config.setMaximumPoolSize(10);
+            config.setPoolName("postgres");
             config.setAutoCommit(false);
             config.addDataSourceProperty("cachePrepStmts", "true");
             config.addDataSourceProperty("prepStmtCacheSize", "250");

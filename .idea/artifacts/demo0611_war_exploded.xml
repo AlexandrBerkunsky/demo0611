@@ -14,6 +14,9 @@
           <element id="module-output" name="demo0611" />
         </element>
         <element id="directory" name="lib">
+          <element id="archive" name="demo0611-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="demo0611" />
+          </element>
           <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:2.6.1" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.22" />
         </element>

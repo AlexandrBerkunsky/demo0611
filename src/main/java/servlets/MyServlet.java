@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import data.MyExample;
 import entities.Driver;
 
+import javax.annotation.Resource;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -18,20 +19,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "MyServlet", urlPatterns = "/")
+@WebServlet(name = "MyServlet")
 public class MyServlet extends HttpServlet {
 
 //    Connection connection;
-
 //    @Override
 //    public void init() throws ServletException {
 //        super.init();
-//        try {
-//            DataSource dataSource = MyExample.getDataSource();
-//            connection = dataSource.getConnection();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+
 //    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -69,11 +64,10 @@ public class MyServlet extends HttpServlet {
 //    s.annotations.NotNull
     private List<Driver> getDrivers() throws NamingException {
         List<Driver> result = new ArrayList<>();
-        PreparedStatement ps;
         InitialContext initialContext = new InitialContext();
-
-//        DataSource dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/postgrest");;
-        HikariDataSource dataSource = MyExample.getDataSource();
+//        HikariDataSource dataSource = (HikariDataSource) initialContext.lookup("java:/comp/env/jdbc/postgres");
+        HikariDataSource dataSource = (HikariDataSource) initialContext.lookup("java:/comp/env/jdbc/postgres");
+//        HikariDataSource dataSource = MyExample.getDataSource();
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
@@ -81,6 +75,7 @@ public class MyServlet extends HttpServlet {
             throwables.printStackTrace();
         }
         try {
+            PreparedStatement ps;
             ps = connection.prepareStatement("select * from driver");
 //            ps.executeUpdate();
 
